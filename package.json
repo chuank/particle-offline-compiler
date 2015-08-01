@@ -1,0 +1,25 @@
+{
+  "name": "particle-offline-compiler",
+  "main": "./lib/particle-offline-compiler",
+  "version": "0.0.0",
+  "description": "Complete Offline building for Particle devices.",
+  "keywords": [
+    "particle",
+    "cloud",
+    "local",
+    "offline",
+    "build"
+  ],
+  "homepage": "https://github.com/chuank/particle-offline-compiler",
+  "bugs": "https://github.com/chuank/particle-offline-compiler/issues",
+  "author": "Chuan Khoo",
+  "activationCommands": {
+    "atom-workspace": "particle-offline-compiler:compile"
+  },
+  "repository": "https://github.com/chuank/particle-offline-compiler",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {}
+}
