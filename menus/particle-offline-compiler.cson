@@ -1,0 +1,37 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Compile Particle firmware locally'
+      'command': 'particle-offline-compiler:compile'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Particle'
+    'submenu': [
+      {
+        'label': 'Compile Particle firmware locally'
+        'command': 'particle-offline-compiler:compile'
+      }
+      # {
+      #   # TODO
+      #   'label': 'Compile target platform:'
+      #   'submenu': [
+      #     {
+      #       'label': 'Core'
+      #       'command': 'particle-offline-compiler:platformCore'
+      #     }
+      #     {
+      #       'label': 'Photon'
+      #       'command': 'particle-offline-compiler:platformPhoton'
+      #     }
+      #     {
+      #       'label': 'P1'
+      #       'command': 'particle-offline-compiler:platformP1'
+      #     }
+      #   ]
+      # }
+    ]
+  }
+]
