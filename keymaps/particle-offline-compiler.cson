@@ -9,3 +9,5 @@
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 'atom-workspace':
   'ctrl-alt-p': 'particle-offline-compiler:compile'
+  'ctrl-alt-o': 'particle-offline-compiler:compileOTA'
+  'ctrl-alt-c': 'particle-offline-compiler:console'

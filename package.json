@@ -13,9 +13,6 @@
   "homepage": "https://github.com/chuank/particle-offline-compiler",
   "bugs": "https://github.com/chuank/particle-offline-compiler/issues",
   "author": "Chuan Khoo",
-  "activationCommands": {
-    "atom-workspace": "particle-offline-compiler:compile"
-  },
   "repository": "https://github.com/chuank/particle-offline-compiler",
   "license": "MIT",
   "engines": {

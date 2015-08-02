@@ -2,18 +2,63 @@
 'context-menu':
   'atom-text-editor': [
     {
-      'label': 'Compile Particle firmware locally'
+      'label': 'Compile firmware locally'
       'command': 'particle-offline-compiler:compile'
     }
+    {
+      'label': 'Compile and attempt OTA update (Core only)'
+      'command': 'particle-offline-compiler:compileOTA'
+    }
+    { type: 'separator' }
   ]
 'menu': [
   {
     'label': 'Particle'
     'submenu': [
       {
-        'label': 'Compile Particle firmware locally'
+        'label': 'Compile firmware locally'
         'command': 'particle-offline-compiler:compile'
       }
+      {
+        'label': 'Compile and attempt OTA update (Core only)'
+        'command': 'particle-offline-compiler:compileOTA'
+      }
+      { type: 'separator' }
+      {
+        'label': 'Target platform:'
+        'submenu': [
+          {
+            type: 'radio'
+            'label': 'Photon'
+            'command': 'particle-offline-compiler:platformPhoton'
+          }
+          {
+            type: 'radio'
+            'label': 'P1'
+            'command': 'particle-offline-compiler:platformP1'
+          }
+          {
+            type: 'radio'
+            'label': 'Core'
+            'command': 'particle-offline-compiler:platformCore'
+          }
+        ]
+      }
+      {
+        'label': 'DFU serial port'
+        'submenu': [
+          {
+            'label': '[refresh DFU serial device list]'
+            'command': 'particle-offline-compiler:getPorts'
+          }
+        ]
+      }
+      { type: 'separator' }
+      {
+        'label': 'Show compile log / upload console (coming soon!)'
+        'command': 'particle-offline-compiler:console'
+      }
+
       # {
       #   # TODO
       #   'label': 'Compile target platform:'
