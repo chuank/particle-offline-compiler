@@ -20,12 +20,12 @@
         'command': 'particle-offline-compiler:compile'
       }
       {
-        'label': 'Compile and attempt OTA update (Core only)'
+        'label': 'Compile and OTA update (Core only, WIP)'
         'command': 'particle-offline-compiler:compileOTA'
       }
       { type: 'separator' }
       {
-        'label': 'Target platform:'
+        'label': 'Target platform'
         'submenu': [
           {
             type: 'radio'
@@ -55,8 +55,8 @@
       }
       { type: 'separator' }
       {
-        'label': 'Show compile log / upload console (coming soon!)'
-        'command': 'particle-offline-compiler:console'
+        'label': 'Toggle compile/upload CONSOLE'
+        'command': 'window:toggle-dev-tools'
       }
 
       # {

@@ -3,13 +3,14 @@
 
 module.exports =
 class DFUManager
-  @packageName: require('../package.json').name
+  packageName: require('../package.json').name
 
-  # set up Disposables (for when devices disconnect and we don't need them anymore)
-  @ports = []
+  constructor: ->
+      @_ports = []
 
   # gets all serial ports with the '/dev/tty.usbmodem*' name as possible candidates
-  @getPorts: ->
+  getPorts: ->
+
     # clear previous port listing first
     @clearPorts()
 
@@ -24,6 +25,7 @@ class DFUManager
         '-il'
       ]
     else
+      # windows untested!
       input = lsCmd.split(/(\s+)/)
       command = input[0]
       args = input.slice(1)
@@ -44,9 +46,9 @@ class DFUManager
           # some other error, alert
           console.log("[getPorts] Something weird happened. Sorry.")
 
-    @getPortsProcess = new BufferedProcess({command, args, stdout, stderr, exit})
+    @_getPortsProcess = new BufferedProcess({command, args, stdout, stderr, exit})
 
-  @processSerialList: (output) =>
+  processSerialList: (output) =>
     # regex to split lines if multiple devices are found
     devicelist = output.split(/\r?\n/)
     if(devicelist[devicelist.length-1]=='')
@@ -73,9 +75,11 @@ class DFUManager
                 }]}]}
       ]
 
+      # FIXME setSerialPort does not take a unique devName for each iterated device?!?!?! All menu items take on the last devName?!@#$%?#!@!
       console.log("#{@packageName}:#{devShortName}", devName)
       newSerialCommand = atom.commands.add 'atom-workspace', "#{@packageName}:#{devShortName}", => @setSerialPort(devName)
-      @ports.push {
+
+      @_ports.push {
         name: devName
         shortname: devShortName
         serialDevice: newSerialDeviceMenu
@@ -86,19 +90,18 @@ class DFUManager
     if numDevices == 1
       @setSerialPort(devicelist[0])
 
-    console.log("@serialDevices:", @ports)
-
-  @setSerialPort: (devName) ->
-    console.log("Serial port changed to:", devName)
+  setSerialPort: (devName) ->
+    console.log("@_ports:", devName, @_ports)
+    # console.log("Serial port changed to:", devName)
     atom.config.set("#{@packageName}.serialPort", devName)
 
-  @clearPorts: ->
+  clearPorts: ->
     # console.log("@serialDevices:", @serialDevices)
-    while @ports.length > 0
-      dev = @ports[@ports.length-1]
+    while @_ports.length > 0
+      dev = @_ports[@_ports.length-1]
       console.log("[clearPorts] disposing", dev)
       dev.serialDevice.dispose()
       dev.serialCommand.dispose()
-      @ports.pop()
+      @_ports.pop()
 
-    console.log("[clearPorts] @ports is now:", @ports)
+    console.log("[clearPorts] @_ports is now:", @_ports)

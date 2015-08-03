@@ -28,7 +28,7 @@ module.exports =
       order: 3
     serialPort:
       type: 'string'
-      default: '/dev/tty.usbmodem1451'
+      default: '/dev/tty.usbmodem'
       description: 'Serial port to upload firmware binaries to (use the Particle menu to refresh and set this quickly)'
       order: 4
 
@@ -38,35 +38,20 @@ module.exports =
     #   default: true
 
   activate: ->
+    @dfuMan = new DFUManager()
+
     atom.commands.add 'atom-workspace', "#{@packageName}:compile", => @compile()
     atom.commands.add 'atom-workspace', "#{@packageName}:compileOTA", => @compileOTA()
     atom.commands.add 'atom-workspace', "#{@packageName}:platformPhoton", => @setPlatform(0)
     atom.commands.add 'atom-workspace', "#{@packageName}:platformP1", => @setPlatform(1)
     atom.commands.add 'atom-workspace', "#{@packageName}:platformCore", => @setPlatform(2)
-    atom.commands.add 'atom-workspace', "#{@packageName}:getPorts", => DFUManager.getPorts()
-    atom.commands.add 'atom-workspace', "#{@packageName}:console", => @console()
+    atom.commands.add 'atom-workspace', "#{@packageName}:getPorts", => @dfuMan.getPorts()
 
     # populate DFU serial device list upon activation
-    DFUManager.getPorts()
-
-  # TODO
-  # collectResults: (output) =>
-  #   # Found out that html objects still get renderend and they shouldn't, perform htmlEncode
-  #   @commandResult += output.toString().replace(/&/g, '&amp;')
-  #           .replace(/"/g, '&quot;')
-  #           .replace(/'/g, '&#39;')
-  #           .replace(/</g, '&lt;')
-  #           .replace(/>/g, '&gt;')
-    # @returnCallback()
-
-  # returnCallback: =>
-    # @callback(@command, @commandResult)
-
-  deactivate: ->
-    @subscriptions.dispose()
+    @dfuMan.getPorts()
 
   compileOTA: ->
-    console.log("[compileOTA] wip, coming soon!")
+    console.log("[compileOTA] wip")
 
   compile: ->
     @cwd = atom.project.getPaths()[0]
@@ -78,6 +63,7 @@ module.exports =
       'all',
       '-C', @compilerPath,
       'APPDIR='+@cwd,
+      'TARGET_DIR='+@cwd+'/firmware/'+@platform,
       'PLATFORM='+@platform
     ]
 
@@ -92,14 +78,8 @@ module.exports =
     stderr = (err) -> console.log("[compile] STDERR:", err)
     exit = (code) -> console.log("[compile] Exited with #{code}")
 
-    # @commandResult = ''
-    @compileProcess = new BufferedProcess({command, args, stdout, stderr, exit})
-
     console.log("[compile] Command:", command,args.join(' '))
-
-    # TODO send data to prettified output panel
-    # @compileProcess.process.stdout.on 'data', @collectResults
-    # @compileProcess.process.stderr.on 'data', @collectResults
+    @compileProcess = new BufferedProcess({command, args, stdout, stderr, exit})
 
   setPlatform: (devType) ->
     atom.config.set("#{@packageName}.deviceType",platforms[devType])
