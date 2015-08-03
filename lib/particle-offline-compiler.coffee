@@ -1,5 +1,3 @@
-#TODO ParticleOfflineCompileView = require './particle-offline-compiler-view'
-
 {CompositeDisposable} = require 'atom'
 {BufferedProcess} = require 'atom'
 
@@ -31,11 +29,6 @@ module.exports =
       default: '/dev/tty.usbmodem'
       description: 'Serial port to upload firmware binaries to (use the Particle menu to refresh and set this quickly)'
       order: 4
-
-    # TODO
-    # dockCommandResultsToBottom:
-    #   type: 'boolean'
-    #   default: true
 
   activate: ->
     @dfuMan = new DFUManager()

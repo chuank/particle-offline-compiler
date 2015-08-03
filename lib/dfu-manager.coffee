@@ -4,7 +4,6 @@
 module.exports =
 class DFUManager
   packageName: require('../package.json').name
-  # _ports = []
 
   constructor: ->
       @_ports = []

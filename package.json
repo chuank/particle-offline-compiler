@@ -2,7 +2,7 @@
   "name": "particle-offline-compiler",
   "main": "./lib/particle-offline-compiler",
   "version": "0.0.0",
-  "description": "100% offline compiling for Particle devices.",
+  "description": "100% offline compiling for Particle devices. Please see readme below for prerequisites.",
   "keywords": [
     "particle",
     "cloud",
@@ -10,7 +10,7 @@
     "offline",
     "build"
   ],
-  "homepage": "https://github.com/chuank/particle-offline-compiler",
+  "homepage": "http://www.chuank.com",
   "bugs": "https://github.com/chuank/particle-offline-compiler/issues",
   "author": "Chuan Khoo",
   "repository": "https://github.com/chuank/particle-offline-compiler",
