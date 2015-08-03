@@ -1,6 +1,6 @@
 # particle-offline-compiler
 
-An Atom package written for 100% offline code compiler utility for Particle Devices.
+An Atom package for 100% offline code compilation for Particle Devices.
 
 For situations where you *need* to compile and test Particle projects locally, and keep to a streamlined workflow.
 
@@ -8,7 +8,14 @@ For situations where you *need* to compile and test Particle projects locally, a
 
 ### Requirements
 
-Install the Particle local compiler (instructions here: https://github.com/spark/firmware/tree/latest), including the dependencies.
+Install the Particle local compiler ([full instructions here](https://github.com/spark/firmware/tree/latest)), including dependencies.
+
+This package also assumes that you have the latest `particle-cli` installed on your system – this will be required for OTA updates (coming soon):
+
+To install particle-cli:
+
+    $ npm install -g particle-cli
+    $ particle cloud login
 
 
 ---
@@ -39,9 +46,9 @@ If you skip this step, `arm-none-eabi-gcc` et al will *not* compile, as the stan
 
 This is a work in progress.
 
-At this point the package is only tested on OSX Yosemite, Atom 1.0.3. YMMV
+At this point the package is only tested on OSX Yosemite, Atom 1.0.3. YMMV.
 
-Compiler output is currently dumped out the Javascript console – sorry to those who prefer spiffier GUIs, but the console is good enough for now to figure out what's going on during the compile process. Perhaps a proper view can be considered in the future.
+Compiler output is currently dumped out the Javascript console – sorry to those who prefer spiffier GUIs, but the console is good enough for now to figure out what's going on during the compile process. Perhaps a proper view with syntax coloring can be considered in the future.
 
 The key features:
 * DFU (Core/Photon) upload of firmware works
