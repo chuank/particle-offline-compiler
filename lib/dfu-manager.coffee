@@ -4,6 +4,7 @@
 module.exports =
 class DFUManager
   packageName: require('../package.json').name
+  # _ports = []
 
   constructor: ->
       @_ports = []
@@ -59,40 +60,39 @@ class DFUManager
 
     # iterate through all found devices
     for devName in devicelist
-      devShortName = devName.substring(9)
+      # wrap iteration in a do... function as JS does not have block scope but function scope
+      # essentially it means the loop will run throughout and assign only the final iterated code to all previous iterations in the loop
+      do (devName) =>
+        devShortName = devName.substring(9)
+        newSerialDeviceMenu = atom.menu.add [
+          {
+            label: 'Particle'
+            submenu : [
+              {
+                'label': 'DFU serial port'
+                'submenu': [
+                  {
+                    type: 'radio'
+                    'label': devShortName
+                    'command': "#{@packageName}:#{devShortName}"
+                  }]}]}
+        ]
+        # console.log("#{@packageName}:#{devShortName}", devName)
+        newSerialCommand = atom.commands.add 'atom-workspace', "#{@packageName}:#{devShortName}", => @setSerialPort(devName)
 
-      newSerialDeviceMenu = atom.menu.add [
-        {
-          label: 'Particle'
-          submenu : [
-            {
-              'label': 'DFU serial port'
-              'submenu': [
-                {
-                  type: 'radio'
-                  'label': devShortName
-                  'command': "#{@packageName}:#{devShortName}"
-                }]}]}
-      ]
-
-      # FIXME setSerialPort does not take a unique devName for each iterated device?!?!?! All menu items take on the last devName?!@#$%?#!@!
-      console.log("#{@packageName}:#{devShortName}", devName)
-      newSerialCommand = atom.commands.add 'atom-workspace', "#{@packageName}:#{devShortName}", => @setSerialPort(devName)
-
-      @_ports.push {
-        name: devName
-        shortname: devShortName
-        serialDevice: newSerialDeviceMenu
-        serialCommand: newSerialCommand
-      }
-      # end for...loop
+        @_ports.push {
+          name: devName
+          shortname: devShortName
+          serialDevice: newSerialDeviceMenu
+          serialCommand: newSerialCommand
+        }
+        # end for...loop
 
     if numDevices == 1
       @setSerialPort(devicelist[0])
 
   setSerialPort: (devName) ->
-    console.log("@_ports:", devName, @_ports)
-    # console.log("Serial port changed to:", devName)
+    console.log("Serial port changed to:", devName)
     atom.config.set("#{@packageName}.serialPort", devName)
 
   clearPorts: ->
