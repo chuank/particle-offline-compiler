@@ -4,36 +4,48 @@ An Atom package written for 100% offline code compiler utility for Particle Devi
 
 For situations where you *need* to compile and test Particle projects locally, and keep to a streamlined workflow.
 
--
+---
 
 ### Requirements
 
 Install the Particle local compiler (instructions here: https://github.com/spark/firmware/tree/latest), including the dependencies.
 
 
--
+---
 
 ### Instructions
 
-Install **particle-offline-compiler** as you would any regular atom package.
+Install **particle-offline-compiler** as you would any regular atom package – in the `~/.atom/packages` folder.
 
 Before using it, be sure to access the settings on the package and fill in the relevant paths and build options for your firmware – follow the prompts in the settings.
 
-  __Important note on environment variables, especially Yosemite:__
-  **Launch Atom from Terminal**, in order for all of your PATH environment variables to be picked up. `arm-none-eabi-gcc` et al will otherwise *not* compile, as the standard PATH launched from a GUI instance of Atom most likely will not point to where the gcc compiler is installed.
 
--
+##### Important note on environment variables:
+
+In order for all of your PATH environment variables to be picked up, **launch Atom from the terminal**:
+
+    open -a "/Applications/Atom.app"
+
+or if you have already installed the Atom Shell commands:
+
+    `atom`
+
+If you skip this step, `arm-none-eabi-gcc` et al will *not* compile, as the standard PATH launched from a GUI instance of Atom most likely excludes the gcc compiler location.
+
+
+---
 
 ### Work in progress!
 
 This is a work in progress.
 
-At this point the package is only tested on OSX Yosemite, Atom 1.0.3.
+At this point the package is only tested on OSX Yosemite, Atom 1.0.3. YMMV
 
-Compiler output is currently dumped out the Javascript console – sorry to those who prefer spiffier GUIs, but the console is good enough to figure out what's going on during the compile process. Perhaps a proper view can be considered in the future.
+Compiler output is currently dumped out the Javascript console – sorry to those who prefer spiffier GUIs, but the console is good enough for now to figure out what's going on during the compile process. Perhaps a proper view can be considered in the future.
 
+The key features:
 * DFU (Core/Photon) upload of firmware works
-* OTA (Core) update within Atom is planned, which should make this tool a complete, single solution for uploading to Particle Devices
+* OTA (Core) update within Atom is coming, which should make this tool a complete, single solution for uploading to Particle Devices
 * OTA (Photon) update is currently not supported in the 0.4.3rc2 firmware of the Photon devices for local clouds, so we'll have to wait until Particle releases a major update to `particle-server`.
 
 
