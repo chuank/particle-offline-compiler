@@ -14,7 +14,7 @@ class DFUManager
     # clear previous port listing first
     @clearPorts()
 
-    lsCmd = 'ls /dev/tty.usbmodem*'
+    lsCmd = 'ls /dev/tty.usb*'
 
     isWin = /^win/.test(process.platform)
     if (!isWin)
