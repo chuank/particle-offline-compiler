@@ -47,6 +47,8 @@ module.exports =
     console.log("[compileOTA] wip")
 
   compile: ->
+    # window:toggle-dev-tools
+
     @cwd = atom.project.getPaths()[0]
     @compilerPath = atom.config.get("#{@packageName}.particleCompilerPath")
     @platform = atom.config.get("#{@packageName}.deviceType")
@@ -65,6 +67,8 @@ module.exports =
       @serialPort = atom.config.get("#{@packageName}.serialPort")
       args.push 'program-dfu'
       args.push 'PARTICLE_SERIAL_DEV='+@serialPort
+
+    console.clear();
 
     # debug to console
     stdout = (output) -> console.log("[compile] STDOUT:", output)

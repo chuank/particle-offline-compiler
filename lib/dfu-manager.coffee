@@ -30,7 +30,7 @@ class DFUManager
       command = input[0]
       args = input.slice(1)
 
-    console.log("[getPorts] parsed command:\t", command, args.join(' '))
+    # console.log("[getPorts] parsed command:\t", command, args.join(' '))
 
     # stdout triggers only when there's valid data coming back
     stdout = (output) => @processSerialList(output)
@@ -59,8 +59,8 @@ class DFUManager
 
     # iterate through all found devices
     for devName in devicelist
-      # wrap iteration in a do... function as JS does not have block scope but function scope
-      # essentially it means the loop will run throughout and assign only the final iterated code to all previous iterations in the loop
+      # wrap iteration in a do... function to pass a local scope for each iteration
+      # without the do... wrapper, the for loop will iterate and assign results of the final iterated code to all previous iterations in the loop
       do (devName) =>
         devShortName = devName.substring(9)
         newSerialDeviceMenu = atom.menu.add [
@@ -98,9 +98,9 @@ class DFUManager
     # console.log("@serialDevices:", @serialDevices)
     while @_ports.length > 0
       dev = @_ports[@_ports.length-1]
-      console.log("[clearPorts] disposing", dev)
+      # console.log("[clearPorts] disposing", dev)
       dev.serialDevice.dispose()
       dev.serialCommand.dispose()
       @_ports.pop()
 
-    console.log("[clearPorts] @_ports is now:", @_ports)
+    # console.log("[clearPorts] @_ports is now:", @_ports)
