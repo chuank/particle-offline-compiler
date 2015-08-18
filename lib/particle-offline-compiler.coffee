@@ -47,8 +47,6 @@ module.exports =
     console.log("[compileOTA] wip")
 
   compile: ->
-    # window:toggle-dev-tools
-
     @cwd = atom.project.getPaths()[0]
     @compilerPath = atom.config.get("#{@packageName}.particleCompilerPath")
     @platform = atom.config.get("#{@packageName}.deviceType")
