@@ -26,6 +26,8 @@ Install **particle-offline-compiler** as you would any regular atom package – 
 
 Before using it, be sure to access the settings on the package and fill in the relevant paths and build options for your firmware – follow the prompts in the settings.
 
+You should also be able to install this package in Particle Dev – a `Particle.offline` menu will show up in the menu bar, giving you access to offline compiling options.
+
 
 ##### Important note on environment variables:
 
@@ -46,7 +48,7 @@ If you skip this step, `arm-none-eabi-gcc` et al will *not* compile, as the stan
 
 This is a work in progress.
 
-At this point the package is only tested on OSX Yosemite, Atom 1.0.3. YMMV.
+At this point the package is only tested on OSX Yosemite, Atom 1.0.3+. YMMV.
 
 Compiler output is currently dumped out the Javascript console – sorry to those who prefer spiffier GUIs, but the console is good enough for now to figure out what's going on during the compile process. Perhaps a proper view with syntax coloring can be considered in the future.
 

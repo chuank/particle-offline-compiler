@@ -65,7 +65,7 @@ class DFUManager
         devShortName = devName.substring(9)
         newSerialDeviceMenu = atom.menu.add [
           {
-            label: 'Particle'
+            label: 'Particle.offline'
             submenu : [
               {
                 'label': 'DFU serial port'
