@@ -1,6 +1,6 @@
 # particle-offline-compiler
 
-An Atom package for 100% offline code compilation for Particle Devices.
+An Atom / Particle Dev package for 100% offline code compilation for Particle Devices.
 
 For situations where you *need* to compile and test Particle projects locally, and keep to a streamlined workflow.
 
@@ -23,20 +23,18 @@ This should be compatible with projects that connect to Particle.io, or if you'r
 
 
 ## Installation
-In `atom > Preferences > Install`, search for `particle-offline-compiler` and install it.
+In `atom / Particle Dev > Preferences > Install`, search for `particle-offline-compiler` and install it.
 
-If you prefer the manual approach, download the package from Github and place it in your `~/.atom/packages` folder.
+Before using it, open up the settings on the package, and enter the Particle Compiler Path – this should point to the location where you downloaded and compiled the __particle local compiler__ (see instructions above). The __Device Type__ and __Serial Port__ can be left empty, as they can be set easily in the __Particle.offline__ user menu.
 
-Before using it, open up the settings on the package, and enter the Particle Compiler Path – this should point to the location where you downloaded and compiled the __particle local compiler__. The __Device Type__ and __Serial Port__ can be left empty, as they can be set easily in the __Particle.offline__ user menu.
-
-Once installed you should see a Particle.offline menubar with all the relevant, self-explanatory options listed.
+Once installed, you should see a __Particle.offline__ menubar with self-explanatory options listed.
 
 
 ## Usage Instructions
-* If you're using the package in atom, ensure that your code:
-  * uses `.cpp` file extensions, not `.ino`
-  * declares `#include "application.h"` at the top of your main .cpp file
-  * `*.cpp/*.h` libraries should be in the same folder as your main cpp file
+* If you're using the package in atom, ensure the following:
+  * use `.cpp` file extensions, not `.ino`
+  * declare `#include "application.h"` at the top of your main `.cpp` file
+  * `*.cpp/*.h` libraries should be in the same folder as your main `.cpp` file
   * declare your C prototypes manually, either in a `.h` file of the same name as the main `.cpp` file, or alternatively at the beginning of your main `.cpp` file.
 * The `[refresh DFU serial device list]` menu item under `Particle.offline > DFU serial port` needs to be manually refreshed to get the latest list of serial devices connected to your computer.
 * If you are connecting multiple Particle devices to your computer at any one time, be sure to double-check the serial port that you are uploading to!
@@ -53,18 +51,24 @@ or, if you have already installed the Atom Shell commands:
 
     $ atom
 
-If you skip this step, `arm-none-eabi-gcc` et al will *not* compile, as the standard PATH launched from a GUI instance of Atom most likely excludes the gcc compiler location.
+If you're using Particle Dev, launch the application similarly from Terminal:
+
+    open -a "/Applications/Particle Dev.app"
+
+If you skip this step, the compile will _not_ be able to find `arm-none-eabi-gcc` in your PATH environment variable, as the standard PATH launched from a Finder instance of Atom most likely excludes the gcc compiler location (default: /usr/local/bin).
 
 
 ## Work in progress!
 
 This is a work in progress.
 
-At this point the package is only tested on OSX Yosemite, Atom 1.0.3+. YMMV.
+At this point the package is only tested on OSX Yosemite, Atom 1.0.3+ and Particle Dev 0.0.25. YMMV.
 
 Compiler output is currently dumped out the Javascript console – sorry to those who prefer spiffier GUIs, but the console is good enough for now to figure out what's going on during the compile process. Perhaps a proper view with syntax coloring can be considered in the future.
 
-The key features:
+`Dfu-util` has a bug where the conclusion of every firmware upload presents `STDERR: dfu-util: Error during download get_status`, despite the firmware uploading OK. This can be safely ignored.
+
+Key features:
 * Automatic DFU (Core/Photon) upload of firmware works – no need to put your device manually into DFU mode
 * _(to implement)_ Core OTA updates
 * _(to implement)_ Photon OTA updates, currently not supported in the 0.4.3rc2 firmware of the Photon devices for local clouds, so we'll have to wait until Particle releases a major update to `particle-server`
