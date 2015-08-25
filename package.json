@@ -16,7 +16,7 @@
   "repository": "https://github.com/chuank/particle-offline-compiler",
   "license": "MIT",
   "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+    "atom": ">=0.0.25 <2.0.0"
   },
   "dependencies": {}
 }
