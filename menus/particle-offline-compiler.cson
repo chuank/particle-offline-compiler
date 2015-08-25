@@ -1,11 +1,11 @@
 'context-menu':
   'atom-text-editor': [
     {
-      'label': 'Compile firmware locally'
+      'label': 'Compile locally + DFU upload'
       'command': 'particle-offline-compiler:compile'
     }
     {
-      'label': 'Compile and attempt OTA update (Core only)'
+      'label': 'Compile locally + attempt OTA update (Core)'
       'command': 'particle-offline-compiler:compileOTA'
     }
     { type: 'separator' }
@@ -15,11 +15,11 @@
     'label': 'Particle.offline'
     'submenu': [
       {
-        'label': 'Compile firmware locally'
+        'label': 'Compile locally + DFU upload'
         'command': 'particle-offline-compiler:compile'
       }
       {
-        'label': 'Compile and OTA update (Core only, WIP)'
+        'label': 'Compile locally + attempt OTA update (Core)'
         'command': 'particle-offline-compiler:compileOTA'
       }
       { type: 'separator' }
