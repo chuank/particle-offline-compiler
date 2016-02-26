@@ -25,7 +25,9 @@ This should be compatible with projects that connect to Particle.io, or if you'r
 ## Installation
 In `atom / Particle Dev > Preferences > Install`, search for `particle-offline-compiler` and install it.
 
-Before using it, open up the settings on the package, and enter the Particle Compiler Path – this should point to the location where you downloaded and compiled the __particle local compiler__ (see instructions above). The __Device Type__ and __Serial Port__ can be left empty, as they can be set easily in the __Particle.offline__ user menu.
+Before using it, open up the settings on the package, and enter the **Particle Compiler Path** – this should point to the location where you downloaded and compiled your __particle local compiler__ (see instructions, step 1 above). The __Device Type__ and __Serial Port__ can be left empty, as they can be set easily in the __Particle.offline__ user menu.
+
+![image](https://cloud.githubusercontent.com/assets/1781911/13342380/0a638090-dc95-11e5-8dcc-4f8415e9d856.png)
 
 Once installed, you should see a __Particle.offline__ menubar with self-explanatory options listed.
 
