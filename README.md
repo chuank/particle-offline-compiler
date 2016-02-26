@@ -62,7 +62,7 @@ If you skip this step, the compile will _not_ be able to find `arm-none-eabi-gcc
 
 This is a work in progress.
 
-At this point the package is only tested on OSX Yosemite, Atom 1.0.3+ and Particle Dev 0.0.25. YMMV.
+At this point the package is only tested on OSX ~~Yosemite~~ El Capitan, Atom ~~1.0.3+~~ 1.5.3 and Particle Dev 0.0.25. YMMV.
 
 Compiler output is currently dumped out the Javascript console – sorry to those who prefer spiffier GUIs, but the console is good enough for now to figure out what's going on during the compile process. Perhaps a proper view with syntax coloring can be considered in the future.
 
@@ -71,19 +71,21 @@ Compiler output is currently dumped out the Javascript console – sorry to thos
 Key features:
 * Automatic DFU (Core/Photon) upload of firmware works – no need to put your device manually into DFU mode
 * _(to implement)_ Core OTA updates
-* _(to implement)_ Photon OTA updates, currently not supported in the 0.4.3rc2 firmware of the Photon devices for local clouds, so we'll have to wait until Particle releases a major update to `particle-server`
+* _(to implement)_ Photon OTA updates
 
 
 ## Wait, isn't there Particle Dev that does the same thing?
 
 Yes and no. [Particle Dev](https://www.particle.io/dev), which was built on top of Atom Shell a.k.a. Electron, is a fantastic project that addresses a specific need – quick, easy local __development__ (and storage) of code, with firmware builds/uploads still routed through Particle.io for ease of use. This same ease of use presents workflow obstacles when it comes to local cloud development, and slows down development massively.
 
-This package was developed to improve workflow bottlenecks of the existing official Particle IDEs (Build Web IDE and Particle Dev).
+There's also the more recent [Particle Dev Local Compiler](https://github.com/spark/particle-dev-local-compiler) which uses Docker VMs to install multiple local firmware builds, but it does not allow you to specify your own locally-modified `spark-firmware` – which is what this package is originally written for.
 
 If you encounter any of these scenarios, I hope this package will be of help:
 
 * You are developing a local cloud. Your current means of uploading new firmware is a combination of a) writing code in the Build Web IDE / Particle Dev, b) downloading the .bin files manually, before c) using `particle-cli` to send OTA updates to your Core(s), or perhaps, via DFU to your Photons. It's a slow process switching through these tasks just to get firmware uploaded.
 
 * You want to try out the latest firmware releases from Particle.io and/or custom code libraries, but the Build Web IDE is still pegged to earlier, stable builds (for good reason), leaving you to build your own local compiler, but without a streamlined way to upload your binaries to your devices.
+
+* You have forked and modified portions of `spark-firmware` and want an easier way to compile system and user firmware through the Atom GUI.
 
 It's worth noting that Particle Dev (and the Particle platform at large) goes through continuous development, and will *eventually* implement much better development workflows. This tiny Atom package might be helpful for those who want an immediate, interim solution to a faster workflow for local-cloud and/or offline Particle projects.
